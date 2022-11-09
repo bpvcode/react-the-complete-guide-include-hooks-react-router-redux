@@ -1,6 +1,6 @@
 import './Footer.css'
 
-function Footer(){
+const Footer = () => {
 
     const quotes = [
         'An investment in knowledge pays the best interest.',

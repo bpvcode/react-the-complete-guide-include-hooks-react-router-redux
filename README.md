@@ -57,3 +57,11 @@ export default ExpenseItem;
 ```
 
 NOTE: At the end `Card` will have bothe `card` and `expensive-item` as classNames, because `props.className` is using the className passed for each card component, on top of the `card` class as well.
+
+Handlers should be use to handle with different events. So handlers are functions that we create to react to some event like `onClick` -> Events start with `on`
+
+React hooks can be recognize by the fact that they start with `use` word, like `useState()`. This hooks should be only called directly inside a component function, but not nested in another functions inside component function
+
+`const [title, setTitle] = useState(props.title)` -> This means that `useState()` function will receive property to look at (`props.title`), and we can assign them to a variable name (`title`) and a function to change that variable value `setTitle`
+
+`Two-Way-Binding` means a value that is pass on to a parent component through props, and received from the parent components. This way we can create controlled components. Example: The Expenses component controls the ExpensesFilter component.

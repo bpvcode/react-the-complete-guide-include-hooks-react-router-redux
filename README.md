@@ -65,3 +65,11 @@ React hooks can be recognize by the fact that they start with `use` word, like `
 `const [title, setTitle] = useState(props.title)` -> This means that `useState()` function will receive property to look at (`props.title`), and we can assign them to a variable name (`title`) and a function to change that variable value `setTitle`
 
 `Two-Way-Binding` means a value that is pass on to a parent component through props, and received from the parent components. This way we can create controlled components. Example: The Expenses component controls the ExpensesFilter component.
+
+CSS modules insure that the styles that we apply are scoped to the component we import the module file into. That way we avoid duplicate class names.
+For that we need (Example):
+
+- Create css file as module - `Card.module.css`
+- Import css file as module - `import styles from './Card.module.css'`
+- Use classNames as objects - `<div className={styles.className}> </div>`
+

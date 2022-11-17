@@ -1,9 +1,10 @@
-import './Header.css'
+import { FC } from 'react';
+import styles from './Header.module.css'
 
-const Header = () => {
+const Header: FC = () => {
     return (
-        <div className="header">
-        <a href="#default" className="logo">Expense Tracker</a>
+        <div className={styles.header}>
+        <h1 className={styles.logo}>Devops Summit 2023</h1>
         {/* <div className="header-right">
             <a className="active" href="#home">Home</a>
             <a href="#contact">Contact</a>

@@ -1,13 +1,13 @@
 /* Style the header with a grey background and some padding */
 .header {
     overflow: hidden;
-    background-color: rgb(31, 31, 31);
+    background-color: #282c34;
     padding: 20px 10px;
   }
-  
+
   /* Style the header links */
-  .header a {
-    float: left;
+  .header h1 {
+    float: center;
     color: white;
     text-align: center;
     padding: 12px;
@@ -18,16 +18,14 @@
   }
   
   /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
-  .header a.logo {
-    font-size: 20px;
+  .header h1.logo {
+    font-size: 2rem;
     font-weight: bold;
   }
-  
+
   /* Change the background color on mouse-over */
-  .header a:hover {
-    background-color: #3f3f3f;
+  .header h1:hover {
     color: white;
-    border: 1px solid white;
   }
 
 

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import UserExample from '../../userExample.jpeg';
+import UserExample from '../../userExample.jpg';
 import { UserModal } from '../user/User';
 import styles from './UserList.module.css'
 

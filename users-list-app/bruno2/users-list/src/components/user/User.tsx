@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import UserIcon from '../../userLogo.png';
+import ErrorModal from '../UI/ErrorModal';
 import styles from './User.module.css'
 
 export interface UserModal{
@@ -16,6 +17,7 @@ const User: FC <UserProps> = ({onAddNewUser}) => {
 
   const [enteredName, setEnteredName] = useState<string>('')
   const [enteredJobTitle, setEnteredJobTitle] = useState<string>('')
+  const [isError, setIsError] = useState<boolean>(false)
 
   const changedEnteredNameHandler = (props: any) => {
     console.log(props.target.value)
@@ -29,6 +31,11 @@ const User: FC <UserProps> = ({onAddNewUser}) => {
 
   const onSubmitHandler = (event: any) => {
     event.preventDefault();
+    if(enteredName.trim().length === 0 || enteredJobTitle.trim().length  === 0){
+      return (
+        setIsError(true)
+      )
+    }
     const newUser: UserModal = {
       name: enteredName,
       jobTitle: enteredJobTitle
@@ -39,8 +46,13 @@ const User: FC <UserProps> = ({onAddNewUser}) => {
     setEnteredJobTitle('')
   }
 
+  const onIsErrorHandler = (isError: boolean) => {
+    setIsError(isError)
+  }
+
     return(
-        <>
+      <>
+        {isError && <ErrorModal isErrorHandler={onIsErrorHandler}/>}
         <div className={"container mx-auto p-4"}>
         <img src={UserIcon} className={styles.image} alt="logo" />
         <div className={"w-full md:w-1/2 lg:w-1/3 mx-auto my-12"}>
@@ -55,6 +67,7 @@ const User: FC <UserProps> = ({onAddNewUser}) => {
                 className={"px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-black-500 focus:bg-white focus:ring-0 text-gray-800 text-sm"}
                 placeholder="Name"
                 onChange={changedEnteredNameHandler}
+                value={enteredName}
             />
             <input
                 type="text"
@@ -62,6 +75,7 @@ const User: FC <UserProps> = ({onAddNewUser}) => {
                 className={"px-4 py-3 mt-4 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-gray-800 text-sm"}
                 placeholder="Job Title"
                 onChange={changedEnteredJobTitleHandler}
+                value={enteredJobTitle}
             />
             <button
                 type="submit"

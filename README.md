@@ -3,12 +3,24 @@
 Udemy course
 
 
-## 1 Apps during the course
+## Apps developed during the course
 
 Check here all deployed apps and respective code
 
-- [Expense Tracker](https://expense-tracker-bpvcode-learn-react.netlify.app) find code [here](./expense-tracker/expense-tracker)
-- [Users List (Event registration)](https://devops-summit-signup-bpvcode.netlify.app) find code [here](./users-list-app/bruno2/users-list)
+[**Expense Tracker**](https://expense-tracker-bpvcode-learn-react.netlify.app) 
+
+Find code [here](./expense-tracker/expense-tracker)
+
+![image](https://user-images.githubusercontent.com/66181027/202550141-c424ce2c-b660-43bc-bf53-67276be45032.png)
+
+[**Users List (Event registration)**](https://devops-summit-signup-bpvcode.netlify.app) 
+
+Find code [here](./users-list-app/bruno2/users-list)
+
+![image](https://user-images.githubusercontent.com/66181027/202550330-e6b34eb7-a6f8-427b-9a80-92af43699a92.png)
+
+
+## Notes
 
 ## 3.1 Introducting JSX
 

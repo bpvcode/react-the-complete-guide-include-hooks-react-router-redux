@@ -1,0 +1,9 @@
+.users {
+    text-align:center;
+}
+
+.users > ul {
+    display: inline-block;
+    *display:inline; /* ie7 fix */
+    float: none; /* this is the part that makes it work */
+}

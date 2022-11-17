@@ -2,6 +2,14 @@
 
 Udemy course
 
+
+## 1 Apps during the course
+
+Check here all deployed apps and respective code
+
+- [Expense Tracker](https://expense-tracker-bpvcode-learn-react.netlify.app) find code [here](./expense-tracker/expense-tracker)
+- [Users List (Event registration)](https://devops-summit-signup-bpvcode.netlify.app) find code [here](./users-list-app/bruno2/users-list)
+
 ## 3.1 Introducting JSX
 
 Sintax -> The ability to return `html` code into a `javascript` function.

@@ -1,13 +1,18 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import UserIcon from '../../userLogo.png';
 import styles from './User.module.css'
 
-export interface User{
+export interface UserModal{
   name: string,
   jobTitle: string
 }
 
-const User = (props: any) => {
+export interface UserProps{
+  onAddNewUser: (newUser: UserModal) => void
+}
+
+
+const User: FC <UserProps> = ({onAddNewUser}) => {
 
   const [enteredName, setEnteredName] = useState<string>('')
   const [enteredJobTitle, setEnteredJobTitle] = useState<string>('')
@@ -24,11 +29,11 @@ const User = (props: any) => {
 
   const onSubmitHandler = (event: any) => {
     event.preventDefault();
-    const newUser: User = {
+    const newUser: UserModal = {
       name: enteredName,
       jobTitle: enteredJobTitle
     }
-    props.onAddNewUser(newUser)
+    onAddNewUser(newUser)
 
     setEnteredName('')
     setEnteredJobTitle('')

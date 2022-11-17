@@ -1,12 +1,18 @@
+import { FC } from 'react';
 import UserExample from '../../userExample.jpeg';
+import { UserModal } from '../user/User';
 import styles from './UserList.module.css'
 
-const UserList = (props: any) => {
+export interface UserListProps{
+    users: UserModal[]
+}
+
+const UserList: FC <UserListProps> = ({users}) => {
 
     return (
         <div className={"container flex flex-col mx-auto w-full items-center justify-center"}>
         <ul className={`flex flex-col ${styles.users}`}>
-        {props.users.map((user: { name: string , jobTitle: string }) => (
+        {users.map((user: { name: string , jobTitle: string }) => (
             <li className={"border-gray-400 flex flex-row mb-2"}>
                 <div className={"shadow border select-none cursor-pointer bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center p-4"}>
                     <div className={"flex flex-col w-10 h-10 justify-center items-center mr-4"}>

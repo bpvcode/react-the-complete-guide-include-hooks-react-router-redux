@@ -22,7 +22,42 @@ Find code [here](./users-list-app/bruno2/users-list)
 
 ## Notes
 
-## 3.1 Introducting JSX
+## Indice - Core topics
+
+Core topics to know about React
+
+Basic:
+
+- Components and Custom Components
+- JSX - Dynamic Data and Expressions
+- Passing Data via "props"
+- Concept of composition "children props"
+- Reusable Components
+
+Intermediary:
+
+- Multiple States - useState()
+- Events
+- Two way binding
+  - Lifting The State Up (Child-to-Parent Component Communication - Bottom-up)
+- Rendering Lists of Data
+  - Understanding "keys"
+- Conditional Rendering
+- Styling React Components (CSS Modules and other approaches)
+  - Dynamic styling
+  - Media Queries
+- Debugging (Breakpoints and React Dev Tools)
+- React Fragments - <></>
+- React Portal - ReactDOM.createPortal()
+- React Ref's - useRefs()
+
+Advanced:
+
+- Side Effects - useEffect()
+- Reducers - useReducer()
+- Context API
+
+## Introducting JSX
 
 Sintax -> The ability to return `html` code into a `javascript` function.
 The source code will be automatically transformed to be more browser friendly and run in the browser.
@@ -93,3 +128,89 @@ For that we need (Example):
 - Import css file as module - `import styles from './Card.module.css'`
 - Use classNames as objects - `<div className={styles.className}> </div>`
 
+## React fragments
+
+Use to not end up with a "`<div></div>` soup"
+
+```typescript
+<React.Fragments>
+  //...
+</React.Fragments>
+```
+
+```typescript
+<>
+  //...
+</>
+```
+
+## React portals
+
+Works as Fragments, both are also used to have a better semantical html code, which makes the app more accessible, as example, make sure it don't render to many nested `<div>`.
+
+We can use a portal to keep writing our components as we do, but rendering different in the real DOM. So the JSX code is a bit different than the actual html code on the browser when rendering, in order to improve accessibility and semantic. Very used in overlays (example: modal errors)
+
+To add a Portal we need a place to "portal" the component, and we should tell the component where he should "portal" to.
+
+Add a `<div>` in `index.html` (Example: align with `<div id="root"></div>`) and give a `id` to that `div` (Example: `<div id="modal-root"></div>`)
+
+```typescript
+import ReactDOM from 'react-dom'
+
+const ErrorModal = (props) => {
+  return (
+    {ReactDOM.createPortal(
+      <Backdrop onConfirm={props.onConfirm} />,
+      document.getElementById('backdrop-root')
+    )}
+    {ReactDOM.createPortal(
+      <ModalOverlay
+        title={props.title},
+        message={props.message}
+        onConfirm={props.onConfirm}
+      />,
+      document.getElementById('modal-root')
+    )}
+  )
+}
+```
+
+## React ref's
+
+This way e can read the value of the property directly from the DOM. And we can remove the `onChange()` method to listen the input. However, whe need to change the value of the DOM object at the end of `addUserHandler()` function to reset the input field. (Note, is not really good practice to change the values or even worst DOM objects and properties directly, but in this specific case is fine).
+
+Example:
+
+```typescript
+import {useRef} from 'react'
+
+const User = (props) => {
+
+  const enteredNameRef = useRef();
+  const enteredAgeRef = useRef();
+
+
+  const addUserHandler = (event) => {
+    const enteredName= enteredNameRef.current.value;
+    const enteredAge = enteredAgeRef.current.value;
+
+    props.onAddUser(enteredName , enteredAge)
+
+    enteredNameRef.current.value = '';
+    enteredAgeRef.current.value = '';
+  }
+
+  return (
+    <input
+      // ...
+      ref={enteredName}
+    ></input>
+      <input
+      // ...
+      ref={enteredAge}
+    ></input>
+  )
+}
+```
+
+Refs uses `Uncontrolled Components` once the control is based on the value passed by the browser directly, and React don't manage the state of that component.

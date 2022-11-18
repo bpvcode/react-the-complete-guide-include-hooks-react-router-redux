@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+Color Palette:
+
+1º https://in.pinterest.com/pin/428967933257984039/
+
+006270
+009394
+00E0C7
+FFFFFF
+
+2º https://in.pinterest.com/pin/196610339977626951/?mt=login
+
+191E29
+132D46
+01C38D
+696E79
+FFFFFF
+
+3º extra: 282c34
+
+
+*/
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #191E29;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

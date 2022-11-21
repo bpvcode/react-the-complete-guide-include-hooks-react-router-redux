@@ -1,14 +1,13 @@
 .appHeader {
     background-color: #191E29;
-    border-color: 1px solid red;
-    min-height: 30%;
+    height:20vh;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     font-size: calc(8px + 2vmin);
     color: #01C38D;
-    margin: 1%
+    padding: 0% 0.5% 0% 0.5%
 }
   
 .headerLogo{
@@ -29,6 +28,10 @@
     color: #ffffff;
 }
 
-a:hover, a:focus, a:active{
+
+/* label:hover, label:focus, label:active, label:visited{
     color: #01C38D;
-}
+    /* text-decoration: 2px underline white; */
+    /* border-bottom: 2px solid #01C38D;
+    padding-bottom: 15%; */
+/* } */

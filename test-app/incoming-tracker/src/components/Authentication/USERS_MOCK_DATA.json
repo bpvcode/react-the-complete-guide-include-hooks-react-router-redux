@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1",
+        "name": "Admin",
+        "password": "test",
+        "roles": ["admin", "staff"],
+        "restaurantRoles": ["Cabron", "COW"],
+        "selectedRestaurant": ""
+    },
+    {
+        "id": "2",
+        "name": "Staff Cow",
+        "password": "test",
+        "roles": ["staff"],
+        "restaurantRoles": ["COW"],
+        "selectedRestaurant": ""
+    },
+    {
+        "id": "3",
+        "name": "Staff Cabron",
+        "password": "test",
+        "roles": ["staff"],
+        "restaurantRoles": ["Cabron"],
+        "selectedRestaurant": ""
+    }
+]

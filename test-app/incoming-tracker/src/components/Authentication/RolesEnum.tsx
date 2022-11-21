@@ -1,4 +1,9 @@
 export enum Roles{
-    Admin,
-    Staff
+    Admin = "admin",
+    Staff = "staff"
+}
+
+export enum Restaurants{
+    Cabron = "Cabron",
+    COW = "COW"
 }

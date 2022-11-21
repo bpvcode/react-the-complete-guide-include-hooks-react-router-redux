@@ -1,0 +1,13 @@
+.SignInScreen{
+    height:30vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+.Typing {
+    color: white;
+    width: 75%;
+    font-size: 2rem;
+  }

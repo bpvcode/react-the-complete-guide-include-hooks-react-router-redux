@@ -1,23 +1,20 @@
 import { FC, useState } from "react";
 import styles from './SignIn.module.css'
 import Typical from 'react-typical';
-import { Roles } from "./RolesEnum";
+import { Restaurants, Roles } from "./RolesEnum";
+import { Select, Option } from  "@material-tailwind/react"
+import USERS_MOCK_DATA from './USERS_MOCK_DATA.json'
+import ErrorModal from "../UI/ErrorModal/ErrorModal";
+import classNames from "classnames";
 
 export interface UserModal {
     id: string,
     name: string,
     password: string,
-    roles: Roles[]
+    roles: Roles[],
+    restaurantRoles: Restaurants[],
+    selectedRestaurant: string
 }
-
-const USER_MODALS_TEST = [
-    {
-        id: "1",
-        name: "Rita",
-        password: "test",
-        roles: [Roles.Admin, Roles.Staff]
-    }
-]
 
 interface UserProps{
     onSignIn: (newUser: UserModal) => void
@@ -28,36 +25,62 @@ const SignIn: FC <UserProps> = ({onSignIn}) => {
     const [user, setUser] = useState<UserModal>()
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
+    const [restaurant, setRestaurant] = useState<Restaurants>()
+    const [isError, setIsError] = useState<boolean>(false)
+    const [errorTitle, setErrorTitle] = useState<string>('')
+    const [errorMessage, setErrorMessage] = useState<string>('')
 
     const onChangeNameHandler = (event: any) => {
-        console.log(event.target.value)
         setName(event.target.value)
     }
 
     const onChangePasswordHandler = (event: any) => {
-        console.log(event.target.value)
         setPassword(event.target.value)
     }
 
-    const onSubmitHandler = (event: any) => {
-        event.preventDefault();
+    const onChangeRestaurantHandler = (event: any) => {
+        setRestaurant(event)
+    }
 
-        if(name === USER_MODALS_TEST[0].name && password === USER_MODALS_TEST[0].password){
-            console.log("SIGN IN " , event.target.value)
-            setUser(USER_MODALS_TEST[0])
-            onSignIn(USER_MODALS_TEST[0])
-        } else {
+    const verifyUser = (name: string, password: string, restaurant: Restaurants) => {
+        const enteredUser = USERS_MOCK_DATA.find(element => {
+            return element.name === name && element.password === password && element.restaurantRoles.includes(restaurant as Restaurants)
+        })
+        if(enteredUser !== undefined){
+            enteredUser.selectedRestaurant = restaurant
+            setUser(enteredUser as UserModal)
+            onSignIn(enteredUser as UserModal)
+        }else {
+            setName('')
+            setPassword('')
+            setRestaurant(undefined)
+            setErrorTitle(`Sign In Error`)
+            setErrorMessage(`Make sure you input your name and password correct and choose a restaurant that you are allow to see`)
             return (
-                <h2>ERROOOOOOOOOOOOOOOO !!!</h2>
+                setIsError(true)
             )
         }
     }
 
 
+    const onSubmitHandler = (event: any) => {
+        event.preventDefault();
+        verifyUser(name, password, restaurant as Restaurants)
+        setName('')
+        setPassword('')
+        setRestaurant(undefined)
+    }
+
+    const onIsErrorHandler = (isError: boolean) => {
+        setIsError(isError)
+    }
+
     return (
         <>
-
-        <div className={styles.SignInScreen}>
+        {isError
+            ? <ErrorModal isErrorHandler={onIsErrorHandler} title={errorTitle} message={errorMessage}/>
+            :
+            <div className={styles.SignInScreen}>
             <div className={styles.Typing}>
                 <Typical
                 steps={[
@@ -75,8 +98,8 @@ const SignIn: FC <UserProps> = ({onSignIn}) => {
             <div className={styles.Authentication}>
 
                 <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
-                    <div className="w-[80%] p-6 m-auto bg-none rounded-md shadow-xl shadow-[#01C38D]/40 ring ring-2 ring-[#009394] lg:max-w-xl">
-                        <h1 className="text-3xl font-semibold text-center text-[#01C38D] no-underline uppercase">
+                    <div className="w-[80%] p-6 m-auto bg-none rounded-md shadow-2xl shadow-[#01C38D]/30 ring ring-2 ring-[#01C38D]/10 lg:max-w-xl">
+                        <h1 className="text-3xl font-semibold text-center text-[#01C38D]/80 no-underline uppercase">
                         Sign in
                         </h1>
                         <form className="mt-6" onSubmit={onSubmitHandler}>
@@ -92,7 +115,7 @@ const SignIn: FC <UserProps> = ({onSignIn}) => {
                                     placeholder="Name"
                                     value={name}
                                     onChange={onChangeNameHandler}
-                                    className="block w-full px-4 py-2 mt-2 text-[#191E29] bg-white border rounded-md focus:border-[#696E79]focus:ring-[#696E79] focus:outline-none focus:ring focus:ring-opacity-40"
+                                    className="block w-full px-4 py-2 mt-2 text-[#191E29] bg-white border rounded-md focus:border-[#696E79] focus:ring-[#696E79] focus:outline-none focus:ring focus:ring-opacity-40"
                                 />
                             </div>
                             <div className="mb-6">
@@ -110,8 +133,15 @@ const SignIn: FC <UserProps> = ({onSignIn}) => {
                                     className="block w-full px-4 py-2 mt-2 text-[#191E29] bg-white border rounded-md focus:border-[#696E79] focus:ring-[#696E79] focus:outline-none focus:ring focus:ring-opacity-40"
                                 />
                             </div>
+                            <div className="w-full">
+                                <Select className="text-white" color="gray" variant="outlined" label="Select Restaurant" onChange={onChangeRestaurantHandler}>
+                                    <Option className="text-[#282c34] selected:bg-[#01C38D] focus:bg-[#01C38D] focus:text-white focus:font-bold" value="Cabron">El Cabron - Taquería</Option>
+                                    <Option className="text-[#282c34] selected:bg-[#01C38D] focus:bg-[#01C38D] focus:text-white focus:font-bold" value="COW">COW - Beef & cocktails</Option>
+                                </Select>
+                            </div>
+
                             <div className="mt-12">
-                                <button className="w-full px-4 py-2 tracking-wide text-[#191E29] transition-colors duration-200 transform bg-[#01C38D] rounded-md hover:bg-[#009394] focus:outline-none focus:bg-white">
+                                <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#01C38D] rounded-md hover:bg-[#01C38D]/60  focus:outline-none focus:bg-white font-bold focus:text-[#191E29]">
                                     Login
                                 </button>
                             </div>
@@ -120,6 +150,8 @@ const SignIn: FC <UserProps> = ({onSignIn}) => {
                 </div>
             </div>
         </div>
+        }
+
       </>
     )
 }

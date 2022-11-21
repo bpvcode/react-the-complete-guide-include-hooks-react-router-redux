@@ -1,1 +1,5 @@
 /newsletter_mail
+# Local Netlify folder
+.netlify
+
+/test-app/EXAMPLES
